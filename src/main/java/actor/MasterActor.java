@@ -18,13 +18,6 @@ public class MasterActor extends UntypedActor {
         getContext().setReceiveTimeout(Duration.create(1000, TimeUnit.MILLISECONDS));
     }
 
-    public void handleResponses() {
-        for (Response response : responseList) {
-            System.out.println(response.getSearcher().name() + " - " + response.getJsonObject().toString());
-        }
-        Keeper.result.addAll(responseList);
-    }
-
     @Override
     public void onReceive(Object o) {
         if (o instanceof String) {
@@ -34,12 +27,12 @@ public class MasterActor extends UntypedActor {
                 child.tell(new Request(Searcher.values()[i], (String) o), getSelf());
             }
         } else if (o instanceof ReceiveTimeout) {
-            handleResponses();
+            Keeper.result.addAll(responseList);
             getContext().stop(getSelf());
         } else if (o instanceof Response) {
             responseList.add((Response) o);
             if (responseList.size() == 3) {
-                handleResponses();
+                Keeper.result.addAll(responseList);
                 getContext().stop(getSelf());
             }
         }

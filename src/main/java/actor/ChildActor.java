@@ -11,6 +11,5 @@ public class ChildActor extends UntypedActor {
             getSender().tell(response, getSelf());
             return;
         }
-        System.out.println(o.toString());
     }
 }
