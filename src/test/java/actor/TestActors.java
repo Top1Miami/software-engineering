@@ -1,9 +1,5 @@
 package actor;
 
-import actor.Keeper;
-import actor.MasterActor;
-import actor.Response;
-import actor.StubServer;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
