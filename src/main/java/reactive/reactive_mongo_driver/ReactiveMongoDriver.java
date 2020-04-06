@@ -11,7 +11,7 @@ public class ReactiveMongoDriver {
     private static MongoCollection<Document> userDocs = database.getCollection("users");
     private static MongoCollection<Document> productDocs = database.getCollection("products");
 
-    public static Observable<Success> addUser(User user){
+    public static Observable<Success> addUser(User user) {
         return userDocs.insertOne(user.toDocument());
     }
 
